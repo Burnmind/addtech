@@ -1,9 +1,42 @@
+<script setup>
+import { Link } from '@inertiajs/vue3';
+</script>
 <template>
-    <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
-        <div
-            class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg"
-        >
-            <slot />
+    <div>
+        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+            <nav class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex justify-center h-16 relative">
+                        <Link
+                            :href="route('main')"
+                            class="shrink-0 flex items-center text-gray-900 font-bold sm:text-3xl text-lg dark:text-white"
+                        >
+                            АДДИТИВ
+                        </Link>
+                        <div class="shrink-0 flex items-center h-16 absolute right-0">
+                            <Link
+                                :href="route('login')"
+                                class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-blue-200"
+                            >
+                                Войти
+                            </Link>
+                            <Link
+                                :href="route('register')"
+                                class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-blue-200"
+                            >
+                                Регистрация
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <main>
+                <div class="py-12">
+                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                        <slot />
+                    </div>
+                </div>
+            </main>
         </div>
     </div>
 </template>
