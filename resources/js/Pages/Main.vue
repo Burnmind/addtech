@@ -17,7 +17,7 @@ defineProps({
         </div>
         <div class="fixed right-32 bottom-20">
             <Link
-                :href="route('add.model')"
+                :href="route('model.add')"
                 class="flex justify-center items-center w-24 h-24 rounded-full bg-gray-900 hover:bg-gray-800 dark:hover:bg-gray-100 dark:hover:bg-white text-white dark:text-gray-900 text-3xl md:text-9xl"
             >
                 +

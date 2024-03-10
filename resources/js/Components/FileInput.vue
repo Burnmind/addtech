@@ -16,7 +16,7 @@ onMounted(() => {
 
 <template>
     <input
-        class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-blue-200 dark:focus:border-blue-600 focus:ring-blue-200 dark:focus:ring-blue-600"
+        class="focus:border-blue-200 dark:focus:border-blue-600 focus:ring-blue-200 dark:focus:ring-blue-600"
         :value="modelValue"
         @input="$emit('update:modelValue', $event.target.value)"
         type="file"

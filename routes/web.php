@@ -23,7 +23,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/add-model', [ModelController::class, 'add'])->name('add.model');
+    Route::get('/add-model', [ModelController::class, 'add'])->name('model.add');
+    Route::post('/add-model', [ModelController::class, 'create'])->name('model.create');
 });
 
 require __DIR__.'/auth.php';

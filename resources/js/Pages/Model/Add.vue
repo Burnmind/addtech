@@ -7,11 +7,22 @@ import InputError from "@/Components/InputError.vue";
 import TextAreaInput from "@/Components/TextAreaInput.vue";
 import { useForm } from '@inertiajs/vue3';
 import FileInput from "@/Components/FileInput.vue";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
 
 const form = useForm({
     name: '',
-    description: ''
+    description: '',
+    files: null
 });
+
+const submit = () => {
+    form.post(
+        route('model.create'),
+        {
+            forceFormData: true
+        }
+    );
+}
 </script>
 
 <template>
@@ -21,7 +32,7 @@ const form = useForm({
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
                 <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                    <form @submit.prevent="form.patch(route('add.model'))" class="mt-6 space-y-6">
+                    <form @submit.prevent="submit" class="mt-6 space-y-6">
                         <div>
                             <InputLabel for="name" value="Название" />
 
@@ -55,10 +66,19 @@ const form = useForm({
                             <FileInput
                                 id="files"
                                 accept="image/png, image/jpeg, .stl"
+                                @input="form.files = $event.target.files"
                                 multiple
                                 required
                             />
-<!--                            <InputError class="mt-2" :message="form.errors.description" />-->
+                            <InputError class="mt-2" :message="form.errors.files" />
+                        </div>
+
+                        <div class="flex justify-end items-center gap-4">
+                            <PrimaryButton :disabled="form.processing">Добавить</PrimaryButton>
+
+                            <Transition enter-from-class="opacity-0" leave-to-class="opacity-0" class="transition ease-in-out">
+                                <p v-if="form.recentlySuccessful" class="text-sm text-gray-600 dark:text-gray-400">Добавлено!</p>
+                            </Transition>
                         </div>
                     </form>
                 </div>
