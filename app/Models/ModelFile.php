@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int id
  * @property int file_id
  * @property int thing_model_id
+ * @property File file
  */
 class ModelFile extends Model
 {

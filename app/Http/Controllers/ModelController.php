@@ -28,7 +28,7 @@ class ModelController extends Controller
         /** @var UploadedFile[] $files */
         $files = $request->file('files');
         foreach ($files as $file) {
-            $path = Storage::putFile('models', $file);
+            $path = Storage::putFile('public/models', $file);
             $file = new File();
             $file->path = $path;
             $file->save();

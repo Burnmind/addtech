@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [MainController::class, 'main'])->name('main');
+Route::get('/model/{id}', [ModelController::class, 'detail'])->name('model.detail');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
