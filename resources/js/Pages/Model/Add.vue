@@ -30,8 +30,7 @@ const submit = () => {
 
     <Layout>
         <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                     <form @submit.prevent="submit" class="mt-6 space-y-6">
                         <div>
                             <InputLabel for="name" value="Название" />
@@ -82,7 +81,6 @@ const submit = () => {
                         </div>
                     </form>
                 </div>
-            </div>
         </div>
     </Layout>
 </template>

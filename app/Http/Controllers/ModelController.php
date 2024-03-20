@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ModelCreateRequest;
+use App\Http\Resources\ThingModelResource;
 use App\Models\File;
 use App\Models\ModelFile;
 use App\Models\ThingModel;
@@ -16,6 +17,13 @@ class ModelController extends Controller
     public function add(): Response
     {
         return Inertia::render('Model/Add');
+    }
+
+    public function detail(int $id): Response
+    {
+        return Inertia::render('Model/Detail', [
+            'thingModel' => new ThingModelResource(ThingModel::query()->where(['id' => $id])->first())
+        ]);
     }
 
     public function create(ModelCreateRequest $request): bool

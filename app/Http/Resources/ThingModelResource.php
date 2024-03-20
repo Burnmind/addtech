@@ -21,7 +21,8 @@ class ThingModelResource extends JsonResource
         return [
             'id' => $this->resource->id,
             'name' => $this->resource->name,
-            'model_files' => ModelFileResource::collection($this->resource->modelFiles)
+            'description' => $this->resource->description,
+            'modelFiles' => ModelFileResource::collection($this->resource->modelFiles)
         ];
     }
 }

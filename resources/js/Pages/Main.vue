@@ -10,11 +10,11 @@ defineProps({
 });
 
 const getImage = (thingModel) => {
-    if (thingModel.model_files.length === 0) {
+    if (thingModel.modelFiles.length === 0) {
         return '';
     }
 
-    return thingModel.model_files[0].file.path;
+    return thingModel.modelFiles[0].file.path;
 }
 
 const changePage = (page) => {
@@ -36,8 +36,8 @@ const changePage = (page) => {
                 class="bg-white rounded overflow-hidden transition-shadow shadow-lg hover:shadow-2xl cursor-pointer"
             >
                 <img class="h-60 w-full object-cover" :src="getImage(thingModel)" :alt="thingModel.name">
-                <div class="px-6 py-4">
-                    <div class="font-bold text-xl mb-2">{{ thingModel.name }}</div>
+                <div class="px-4 py-2">
+                    <div class="font-bold text-lg overflow-hidden whitespace-nowrap text-ellipsis">{{ thingModel.name }}</div>
                 </div>
             </a>
         </div>
