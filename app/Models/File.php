@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 /**
  * @property int id
  * @property string path
+ * @property string name
  */
 class File extends Model
 {
