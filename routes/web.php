@@ -26,6 +26,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/add-model', [ModelController::class, 'add'])->name('model.add');
     Route::post('/add-model', [ModelController::class, 'create'])->name('model.create');
+
+    Route::get('/download-model/{id}', [ModelController::class, 'download'])->name('model.download');
 });
 
 require __DIR__.'/auth.php';

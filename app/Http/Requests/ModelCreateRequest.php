@@ -3,7 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Validation\Rules\File;
+use Closure;
 
 /**
  * @property string name
@@ -18,9 +20,24 @@ class ModelCreateRequest extends FormRequest
             'description' => 'required',
             'files.*' => [
                 'required',
-                File::types(['jpg', 'jpeg', 'png', 'stl'])
+                File::types(['image/png', 'image/jpeg', 'application/octet-stream'])
                     ->min(0)
-                    ->max(1024 * 1024)
+                    ->max(1024 * 1024),
+                static function (string $attribute, UploadedFile $value, Closure $fail) {
+                    $preparedFilename = explode('.', $value->getClientOriginalName());
+                    $fileExtension = end($preparedFilename);
+                    $wrongExtension = !in_array(
+                        $fileExtension,
+                        [
+                            'jpeg', 'jpg', 'jpe',
+                            'png',
+                            'stl'
+                        ]
+                    );
+                    if ($wrongExtension) {
+                        $fail("Расширение файла неверное!");
+                    }
+                },
             ]
         ];
     }

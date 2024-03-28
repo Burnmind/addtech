@@ -83,7 +83,7 @@ const viewFileSize = (fileSize) => {
                                     <div class="italic text-gray-400 ml-7" v-html="viewFileSize(modelFile.file.size)"></div>
                                 </div>
                                 <a
-                                    :href="modelFile.file.path"
+                                    :href="route('model.download', {'id': modelFile.file.id})"
                                     class="text-base font-bold text-blue-500 hover:text-blue-300 ml-auto"
                                     download
                                 >

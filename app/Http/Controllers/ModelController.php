@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class ModelController extends Controller
 {
@@ -39,7 +40,7 @@ class ModelController extends Controller
             $path = Storage::putFile('public/models', $uploadedFile);
             $file = new File();
             $file->path = $path;
-            $file->name = $uploadedFile->getFilename();
+            $file->name = $uploadedFile->getClientOriginalName();
             $file->save();
 
             $modelFile = new ModelFile();
@@ -49,5 +50,13 @@ class ModelController extends Controller
         }
 
         return true;
+    }
+
+    public function download(int $id): StreamedResponse
+    {
+        /** @var File $file */
+        $file = File::query()->where(['id' => $id])->first();
+
+        return Storage::download($file->path, $file->name);
     }
 }
