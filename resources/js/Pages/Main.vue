@@ -30,7 +30,7 @@ const changePage = (page) => {
     <Head title="Модели" />
     <Layout>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
-            <a
+            <Link
                 v-for="thingModel in thingModelList.data"
                 :href="route('model.detail', {'id': thingModel.id})"
                 class="bg-white rounded overflow-hidden transition-shadow shadow-lg hover:shadow-2xl cursor-pointer"
@@ -39,7 +39,7 @@ const changePage = (page) => {
                 <div class="px-4 py-2">
                     <div class="font-bold text-lg overflow-hidden whitespace-nowrap text-ellipsis">{{ thingModel.name }}</div>
                 </div>
-            </a>
+            </Link>
         </div>
         <div class="flex justify-center mt-2">
             <TailwindPagination
