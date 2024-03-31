@@ -10,11 +10,11 @@ defineProps({
 });
 
 const getImage = (thingModel) => {
-    if (thingModel.modelFiles.length === 0) {
+    if (thingModel.modelImageFiles.length === 0) {
         return '';
     }
 
-    return thingModel.modelFiles[0].file.path;
+    return thingModel.modelImageFiles[0].file.path;
 }
 
 const changePage = (page) => {

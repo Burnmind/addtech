@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\MimeType;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Validation\Rules\File;
@@ -20,7 +21,12 @@ class ModelCreateRequest extends FormRequest
             'description' => 'required',
             'files.*' => [
                 'required',
-                File::types(['image/png', 'image/jpeg', 'application/octet-stream'])
+                File::types([
+                    MimeType::JPG->value,
+                    MimeType::PNG->value,
+                    MimeType::OCTET_STREAM->value,
+                    MimeType::TEXT_PLAIN->value
+                ])
                     ->min(0)
                     ->max(1024 * 1024),
                 static function (string $attribute, UploadedFile $value, Closure $fail) {

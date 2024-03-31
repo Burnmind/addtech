@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources;
 
+use App\Enums\MimeType;
+use App\Models\ModelFile;
 use App\Models\ThingModel;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -18,11 +20,21 @@ class ThingModelResource extends JsonResource
      */
     public function toArray($request): array|\JsonSerializable|Arrayable
     {
+        $imageFiles = array_filter(
+            $this->resource->modelFiles->getDictionary(),
+            fn (ModelFile $item) => in_array($item->file->mime_type, MimeType::getImageTypes())
+        );
+        $detailFiles = array_filter(
+            $this->resource->modelFiles->getDictionary(),
+            fn (ModelFile $item) => in_array($item->file->mime_type, MimeType::getDetailTypes())
+        );
+
         return [
             'id' => $this->resource->id,
             'name' => $this->resource->name,
             'description' => $this->resource->description,
-            'modelFiles' => ModelFileResource::collection($this->resource->modelFiles)
+            'modelImageFiles' => ModelFileResource::collection($imageFiles),
+            'modelDetailFiles' => ModelFileResource::collection($detailFiles)
         ];
     }
 }

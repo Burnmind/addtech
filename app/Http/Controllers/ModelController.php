@@ -41,6 +41,7 @@ class ModelController extends Controller
             $file = new File();
             $file->path = $path;
             $file->name = $uploadedFile->getClientOriginalName();
+            $file->mime_type = $uploadedFile->getMimeType();
             $file->save();
 
             $modelFile = new ModelFile();
@@ -50,13 +51,5 @@ class ModelController extends Controller
         }
 
         return true;
-    }
-
-    public function download(int $id): StreamedResponse
-    {
-        /** @var File $file */
-        $file = File::query()->where(['id' => $id])->first();
-
-        return Storage::download($file->path, $file->name);
     }
 }

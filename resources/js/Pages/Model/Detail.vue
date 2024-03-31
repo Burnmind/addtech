@@ -2,6 +2,7 @@
 import { Head } from '@inertiajs/vue3';
 import Layout from "@/Layouts/Layout.vue";
 import Tabs from "@/Components/Tabs/Tabs.vue";
+import Galleria from "primevue/galleria";
 
 const tabsCodes = {
     DESCRIPTION: 'description',
@@ -57,9 +58,22 @@ const viewFileSize = (fileSize) => {
     <Layout>
         <div class="py-12">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
-                <div class="flex justify-center">
-                    <img class="max-h-96 object-cover" :src="thingModel.data.modelFiles[0].file.path" :alt="thingModel.data.name">
-                </div>
+                <Galleria
+                    :value="thingModel.data.modelImageFiles"
+                    :numVisible="5"
+                    :circular="true"
+                    containerStyle="max-width: 1216px"
+                    :showThumbnailNavigators="thingModel.data.modelImageFiles.length > 5"
+                    :showItemNavigators="true"
+                    :showItemNavigatorsOnHover="true"
+                >
+                    <template #item="slotProps">
+                        <img :src="slotProps.item.file.path" :alt="slotProps.item.file.name" class="max-w-full max-h-[450px] block cover" />
+                    </template>
+                    <template #thumbnail="slotProps">
+                        <img :src="slotProps.item.file.path" :alt="slotProps.item.file.name" class="max-w-14 max-h-14 block" />
+                    </template>
+                </Galleria>
                 <div class="p-4 sm:p-8">
                     <div class="text-6xl font-bold">{{ thingModel.data.name }}</div>
                     <Tabs
@@ -67,10 +81,22 @@ const viewFileSize = (fileSize) => {
                         :tabs="tabs"
                         :changeTab="changeTab"
                     />
-                    <div v-if="activeTab === tabsCodes.DESCRIPTION">{{ thingModel.data.description }}</div>
-                    <div v-if="activeTab === tabsCodes.FILES" class="mt-12">
+                    <div
+                        v-if="activeTab === tabsCodes.DESCRIPTION"
+                        class="p-8"
+                    >
+                        {{ thingModel.data.description }}
+                    </div>
+                    <div v-if="activeTab === tabsCodes.FILES" class="mt-12 flex flex-col">
+                        <a
+                            :href="route('model.download.all', {'modelId': thingModel.data.id})"
+                            class="ml-auto inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-200 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150"
+                            download
+                        >
+                            Скачать всё .zip
+                        </a>
                         <div
-                            v-for="modelFile in thingModel.data.modelFiles"
+                            v-for="modelFile in thingModel.data.modelDetailFiles"
                             class="mt-2.5 mb-2.5 block w-full rounded-lg shadow bg-white text-left text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white">
                             <div class="p-6 flex">
                                 <div class="mr-10">
