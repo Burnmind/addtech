@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Carbon;
 
 
 /**
@@ -12,6 +13,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property string path
  * @property string name
  * @property string mime_type
+ * @property Carbon created_at
+ * @property Carbon updated_at
  */
 class File extends Model
 {
