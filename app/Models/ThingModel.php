@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\MimeType;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -36,5 +37,21 @@ class ThingModel extends Model
     public function getArchiveName(): string
     {
         return md5($this->name . $this->updated_at->toString()) . $this->id;
+    }
+
+    public function getImageFiles(): Collection
+    {
+        return $this->modelFiles->filter(fn (ModelFile $item) => in_array(
+            $item->file->mime_type,
+            MimeType::getImageTypes()
+        ));
+    }
+
+    public function getDetailFiles(): Collection
+    {
+        return $this->modelFiles->filter(fn (ModelFile $item) => in_array(
+            $item->file->mime_type,
+            MimeType::getDetailTypes()
+        ));
     }
 }

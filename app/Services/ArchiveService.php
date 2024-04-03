@@ -19,7 +19,7 @@ class ArchiveService
         $archive = new \ZipArchive();
         $archive->open($archivePath, \ZipArchive::CREATE);
 
-        foreach ($thingModel->modelFiles as $modelFile) {
+        foreach ($thingModel->getDetailFiles() as $modelFile) {
             $filepath = Storage::path($modelFile->file->path);
             $archive->addFile($filepath, $modelFile->file->name);
         }

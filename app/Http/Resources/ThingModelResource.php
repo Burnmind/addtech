@@ -20,21 +20,12 @@ class ThingModelResource extends JsonResource
      */
     public function toArray($request): array|\JsonSerializable|Arrayable
     {
-        $imageFiles = array_filter(
-            $this->resource->modelFiles->getDictionary(),
-            fn (ModelFile $item) => in_array($item->file->mime_type, MimeType::getImageTypes())
-        );
-        $detailFiles = array_filter(
-            $this->resource->modelFiles->getDictionary(),
-            fn (ModelFile $item) => in_array($item->file->mime_type, MimeType::getDetailTypes())
-        );
-
         return [
             'id' => $this->resource->id,
             'name' => $this->resource->name,
             'description' => $this->resource->description,
-            'modelImageFiles' => ModelFileResource::collection($imageFiles),
-            'modelDetailFiles' => ModelFileResource::collection($detailFiles)
+            'modelImageFiles' => ModelFileResource::collection($this->resource->getImageFiles()),
+            'modelDetailFiles' => ModelFileResource::collection($this->resource->getDetailFiles())
         ];
     }
 }
