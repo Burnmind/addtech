@@ -14,10 +14,11 @@ const model = defineModel();
 const files = ref([]);
 const previews = ref([]);
 
-const toBlob = async (file) => {
+const toBlob = async (file, index) => {
     const type = last(split(file.name, '.'));
 
     const fileData = {
+        index,
         icon: '',
         image: '',
         name: file.name
@@ -34,13 +35,17 @@ const toBlob = async (file) => {
     return fileData;
 }
 
-watch(files, async () => {
+watch(() => [...files.value], async () => {
     previews.value = await Promise.all(
-        files.value.map((file) => toBlob(file))
+        files.value.map((file, index) => toBlob(file, index))
     );
 
     model.value = files.value;
 });
+
+const removeFile = (index) => {
+    files.value.splice(index, 1);
+}
 </script>
 
 <template>
@@ -49,7 +54,7 @@ watch(files, async () => {
             <div
                 class="flex items-center flex-col transition min-h-48 p-14"
                 :class="{
-                    'bg-blue-50': !hovered,
+                    'bg-blue-200/20': !hovered,
                     'bg-blue-200': hovered
                 }"
             >
@@ -63,7 +68,12 @@ watch(files, async () => {
                 </div>
                 <div class="flex justify-center flex-wrap -m-3 mt-12">
                     <div class="flex items-center flex-col w-32 m-3 overflow-hidden" v-for="preview in previews">
-                        <div class="flex justify-center items-center text-6xl w-28 h-28">
+                        <div class="flex justify-center items-center text-6xl w-28 h-28 relative">
+                            <div
+                                @click="removeFile(preview.index)"
+                                class="absolute top-1 right-1 text-white text-xl leading-none cursor-pointer rounded-full bg-gray-900/30 w-5 h-5 flex justify-center items-center">
+                                <div class="cross"></div>
+                            </div>
                             <img
                                 v-if="preview.image"
                                 :key="preview.image"
@@ -82,3 +92,30 @@ watch(files, async () => {
         </Dropzone>
     </FileSelector>
 </template>
+
+<style>
+.cross:before {
+    content: '';
+    position: absolute;
+    display: block;
+    transform: translate(-50%, -50%);
+    height: 12px;
+    width: 2px;
+    background: white;
+}
+
+.cross:after {
+    content: '';
+    position: absolute;
+    display: block;
+    transform: translate(-50%, -50%);
+    height: 2px;
+    width: 12px;
+    background: white;
+}
+
+.cross {
+    position: relative;
+    transform: rotate(45deg);
+}
+</style>

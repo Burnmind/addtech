@@ -7,11 +7,11 @@ use App\Http\Resources\ThingModelResource;
 use App\Models\File;
 use App\Models\ModelFile;
 use App\Models\ThingModel;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class ModelController extends Controller
 {
@@ -27,7 +27,7 @@ class ModelController extends Controller
         ]);
     }
 
-    public function create(ModelCreateRequest $request): bool
+    public function create(ModelCreateRequest $request): RedirectResponse
     {
         $thingModel = new ThingModel();
         $thingModel->name = $request->name;
@@ -50,6 +50,6 @@ class ModelController extends Controller
             $modelFile->save();
         }
 
-        return true;
+        return to_route('model.detail', ['id' => $thingModel->id]);
     }
 }
