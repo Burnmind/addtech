@@ -13,11 +13,6 @@ module.exports = {
     darkMode: 'selector',
     theme: {
         extend: {
-            /**
-             * #3f4b3c
-             * #efefe4
-             * Source Code Pro
-             */
             colors: {
                 blue: {
                     0: '#ffffff',

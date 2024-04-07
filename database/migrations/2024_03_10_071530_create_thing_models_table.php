@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('thing_models', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description');
+            $table->string('description', 4056);
             $table->timestamps();
         });
     }
