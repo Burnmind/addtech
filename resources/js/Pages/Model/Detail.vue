@@ -98,7 +98,7 @@ const viewFileSize = (fileSize) => {
                         <div
                             v-for="modelFile in thingModel.data.modelDetailFiles"
                             class="mt-2.5 mb-2.5 block w-full rounded-lg shadow bg-white text-left text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white">
-                            <div class="p-6 flex">
+                            <div class="p-6 flex flex-wrap sm:flex-nowrap">
                                 <div class="mr-10">
                                     ⚙️
                                 </div>
