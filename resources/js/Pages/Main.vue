@@ -47,7 +47,7 @@ const changePage = (page) => {
                 @pagination-change-page="changePage"
             />
         </div>
-        <div class="fixed right-32 bottom-20">
+        <div class="fixed right-10 bottom-10 md:right-32 md:bottom-20">
             <Link
                 :href="route('model.add')"
                 class="flex justify-center items-center w-14 h-14 md:w-20 md:h-20 rounded-full bg-gray-900 hover:bg-gray-800 dark:hover:bg-gray-100 dark:hover:bg-white text-white dark:text-gray-900 text-6xl md:text-8xl"

@@ -56,7 +56,7 @@ const viewFileSize = (fileSize) => {
     <Head :title="thingModel.data.name" />
 
     <Layout>
-        <div class="py-12">
+        <div class="md:py-12">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
                 <Galleria
                     :value="thingModel.data.modelImageFiles"
@@ -75,7 +75,7 @@ const viewFileSize = (fileSize) => {
                     </template>
                 </Galleria>
                 <div class="p-4 sm:p-8">
-                    <div class="text-6xl font-bold">{{ thingModel.data.name }}</div>
+                    <div class="text-4xl font-bold">{{ thingModel.data.name }}</div>
                     <Tabs
                         :activeTab="activeTab"
                         :tabs="tabs"
