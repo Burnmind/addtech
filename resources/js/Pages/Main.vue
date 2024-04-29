@@ -35,7 +35,8 @@ const changePage = (page) => {
                 :href="route('model.detail', {'id': thingModel.id})"
                 class="bg-white rounded overflow-hidden transition-shadow shadow-lg hover:shadow-2xl cursor-pointer"
             >
-                <img class="h-60 w-full object-cover" :src="getImage(thingModel)" :alt="thingModel.name">
+                <img class="h-60 w-full object-cover" v-if="thingModel.modelImageFiles.length > 0" :src="getImage(thingModel)" :alt="thingModel.name">
+                <img class="h-52 m-auto object-cover" v-else src="/no-image.svg" :alt="thingModel.name">
                 <div class="px-4 py-2">
                     <div class="font-bold text-lg overflow-hidden whitespace-nowrap text-ellipsis">{{ thingModel.name }}</div>
                 </div>
