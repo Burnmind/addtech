@@ -49,7 +49,7 @@ class ModelCreateRequest extends FormRequest
                     $fileExtension = end($preparedFilename);
 
                     $wrongExtension = !in_array(
-                        $fileExtension,
+                        strtolower($fileExtension),
                         self::ACCEPTABLE_FILE_EXTENSIONS
                     );
 
@@ -78,7 +78,7 @@ class ModelCreateRequest extends FormRequest
                         $preparedFilename = explode('.', $item->getClientOriginalName());
                         $fileExtension = end($preparedFilename);
 
-                        $hasModelFile = in_array($fileExtension, self::ACCEPTABLE_MODEL_FILE_EXTENSIONS);
+                        $hasModelFile = in_array(strtolower($fileExtension), self::ACCEPTABLE_MODEL_FILE_EXTENSIONS);
 
                         if ($hasModelFile) {
                             break;

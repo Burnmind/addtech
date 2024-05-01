@@ -24,7 +24,7 @@ const toBlob = async (file, index) => {
         name: file.name
     };
 
-    if (type === 'stl') {
+    if (type && type.toLowerCase() === 'stl') {
         fileData.icon = '⚙';
     } else {
         const buffer = await file.arrayBuffer()
