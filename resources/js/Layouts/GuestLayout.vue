@@ -21,12 +21,13 @@ const showingNavigationDropdown = ref(false);
                 >
                     Войти
                 </Link>
-                <Link
-                    :href="route('register')"
-                    class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-blue-200"
-                >
-                    Регистрация
-                </Link>
+<!--                // Закрытый бета-тест-->
+<!--                <Link-->
+<!--                    :href="route('register')"-->
+<!--                    class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-blue-200"-->
+<!--                >-->
+<!--                    Регистрация-->
+<!--                </Link>-->
             </div>
 
 
@@ -71,9 +72,10 @@ const showingNavigationDropdown = ref(false);
                 <ResponsiveNavLink :href="route('login')">
                     Войти
                 </ResponsiveNavLink>
-                <ResponsiveNavLink :href="route('register')">
-                    Регистрация
-                </ResponsiveNavLink>
+<!--                // Закрытый бета-тест-->
+<!--                <ResponsiveNavLink :href="route('register')">-->
+<!--                    Регистрация-->
+<!--                </ResponsiveNavLink>-->
             </div>
         </div>
     </div>
