@@ -10,12 +10,12 @@ class ArchiveService
     public function packThingModelFiles(ThingModel $thingModel): string
     {
         $publicArchivePath = $this->getArchivePath($thingModel->getArchiveName());
-        $archivePath = Storage::path($publicArchivePath);
 
-        if (file_exists($archivePath)) {
+        if (Storage::exists($publicArchivePath)) {
             return $publicArchivePath;
         }
 
+        $archivePath = Storage::path($publicArchivePath);
         $archive = new \ZipArchive();
         $archive->open($archivePath, \ZipArchive::CREATE);
 
@@ -30,13 +30,11 @@ class ArchiveService
 
     private function getArchivePath(string $name): string
     {
-        $publicPath = 'public' . DIRECTORY_SEPARATOR . 'archives';
-
-        $realPath = Storage::path($publicPath);
-        if (!file_exists($realPath)) {
-            mkdir($realPath, recursive: true);
+        $path = 'public' . DIRECTORY_SEPARATOR . 'archives';
+        if (!Storage::exists($path)) {
+            Storage::makeDirectory($path);
         }
 
-        return $publicPath . DIRECTORY_SEPARATOR . $name . '.zip';
+        return $path . DIRECTORY_SEPARATOR . $name . '.zip';
     }
 }
