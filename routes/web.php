@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [MainController::class, 'main'])->name('main');
-Route::get('/model/{id}', [ModelController::class, 'detail'])->name('model.detail');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -26,6 +25,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/add-model', [ModelController::class, 'add'])->name('model.add');
     Route::post('/add-model', [ModelController::class, 'create'])->name('model.create');
+
+    // Закрытый бета-тест
+    Route::get('/model/{id}', [ModelController::class, 'detail'])->name('model.detail');
 });
 
 require __DIR__.'/auth.php';

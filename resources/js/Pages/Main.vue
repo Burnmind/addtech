@@ -1,5 +1,5 @@
 <script setup>
-import { Head } from '@inertiajs/vue3';
+import {Head, usePage} from '@inertiajs/vue3';
 import Layout from "@/Layouts/Layout.vue";
 import { Link } from '@inertiajs/vue3';
 import { router } from '@inertiajs/vue3'
@@ -24,12 +24,14 @@ const changePage = (page) => {
     router.visit(url)
 }
 
+const user = usePage().props.auth.user;
 </script>
 
 <template>
     <Head title="Модели" />
     <Layout>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
+        <!--   // Закрытый бета-тест     -->
+        <div v-if="user" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
             <Link
                 v-for="thingModel in thingModelList.data"
                 :href="route('model.detail', {'id': thingModel.id})"
@@ -42,6 +44,9 @@ const changePage = (page) => {
                 </div>
             </Link>
         </div>
+        <div v-else class="bg-white rounded transition-shadow shadow-lg w-full p-8">
+            Сервис находится в закрытом бета-тесте. Информация: <a href="mailto:additivity-3d@ya.ru" class="text-blue-400 hover:text-blue-300">additivity-3d@ya.ru</a>
+        </div>
         <div class="flex justify-center mt-2">
             <TailwindPagination
                 :data="thingModelList"
@@ -49,7 +54,9 @@ const changePage = (page) => {
             />
         </div>
         <div class="fixed right-10 bottom-10 md:right-32 md:bottom-20">
+            <!--   // Закрытый бета-тест     -->
             <Link
+                v-if="user"
                 :href="route('model.add')"
                 class="flex justify-center items-center w-14 h-14 md:w-20 md:h-20 rounded-full bg-gray-900 hover:bg-gray-800 dark:hover:bg-gray-100 dark:hover:bg-white text-white dark:text-gray-900 text-6xl md:text-8xl"
             >
