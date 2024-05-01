@@ -20,9 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // Закрытый бета-тест
-Route::middleware('auth')->group(function () {
-    Route::prefix('v1')->group(function() {
-        Route::get('/download/{id}', [DownloadController::class, 'download'])->name('model.download');
-        Route::get('/download-all/{modelId}', [DownloadController::class, 'downloadAll'])->name('model.download.all');
-    });
+Route::prefix('v1')->group(function() {
+    Route::get('/download/{id}', [DownloadController::class, 'download'])->name('model.download');
+    Route::get('/download-all/{modelId}', [DownloadController::class, 'downloadAll'])->name('model.download.all');
 });
