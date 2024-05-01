@@ -46,6 +46,7 @@ const changePage = (page) => {
             <TailwindPagination
                 :data="thingModelList"
                 @pagination-change-page="changePage"
+                :active-classes="['bg-gray-50', 'border-gray-500', 'text-gray-600']"
             />
         </div>
         <div class="fixed right-10 bottom-10 md:right-32 md:bottom-20">

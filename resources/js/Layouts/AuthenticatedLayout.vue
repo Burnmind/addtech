@@ -13,7 +13,7 @@ const showingNavigationDropdown = ref(false);
         <div class="flex justify-center h-16 relative">
             <Link
                 :href="route('main')"
-                class="shrink-0 flex items-center text-gray-900 font-bold sm:text-3xl text-lg dark:text-white"
+                class="shrink-0 flex items-center text-gray-900 font-bold sm:text-3xl text-2xl dark:text-white"
             >
                 АДДИТИВ
             </Link>
