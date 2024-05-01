@@ -6,20 +6,31 @@ use App\Http\Controllers\Controller;
 use App\Models\File;
 use App\Models\ThingModel;
 use App\Services\ArchiveService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class DownloadController extends Controller
 {
-    public function download(int $id): StreamedResponse
+    public function download(int $id, Request $request): StreamedResponse
     {
+        // Закрытый бета-тест
+        if (!$request->user()) {
+            abort(404);
+        }
+
         /** @var File $file */
         $file = File::query()->where(['id' => $id])->first();
         return Storage::download($file->path, $file->name);
     }
 
-    public function downloadAll(int $modelId, ArchiveService $archiveService): StreamedResponse
+    public function downloadAll(int $modelId, ArchiveService $archiveService, Request $request): StreamedResponse
     {
+        // Закрытый бета-тест
+        if (!$request->user()) {
+            abort(404);
+        }
+
         /** @var ThingModel $thingModel */
         $thingModel = ThingModel::query()->where(['id' => $modelId])->first();
         $path = $archiveService->packThingModelFiles($thingModel);

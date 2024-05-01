@@ -19,7 +19,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Закрытый бета-тест
 Route::prefix('v1')->group(function() {
     Route::get('/download/{id}', [DownloadController::class, 'download'])->name('model.download');
     Route::get('/download-all/{modelId}', [DownloadController::class, 'downloadAll'])->name('model.download.all');
