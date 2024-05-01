@@ -85,7 +85,9 @@ const viewFileSize = (fileSize) => {
                         v-if="activeTab === tabsCodes.DESCRIPTION"
                         class="p-8"
                     >
-                        {{ thingModel.data.description }}
+                        <pre>
+                            {{ thingModel.data.description }}
+                        </pre>
                     </div>
                     <div v-if="activeTab === tabsCodes.FILES" class="mt-12 flex flex-col">
                         <a
